@@ -44,12 +44,12 @@ The following settings are available for the plugin:
 - maxRotation (int) [Default: 30]
   This is the maxmimum angle of rotation when 'rotate' is set to true.
 
-- randomize (boolean) [Default: true]
-  This will scatter the items on creation and shuffle each item to a random
-  location within the bounds of the container.
-
 - rotate (boolean) [Default: false]
   Set this to true to use a CSS3 transform to rotate the items.
+
+- scatter (boolean) [Default: true]
+  This will scatter the items on creation and shuffle each item to a random
+  location within the bounds of the container.
 
 - speed (int) [Default: 1000]
   This is the time it take for one shuffle to be completed.
@@ -63,6 +63,7 @@ CHANGE LOG
 -----------------------------
 
 2011.08.24 - Added code for CSS3 rotations and selecting the corner to shuffle
-             over.
+             over. Fixed a bug with non-randomized shuffling. Added the 'toggle'
+             method.
 
 2011.08.23 - Added to GitHub

@@ -22,7 +22,7 @@
                 'easing': 'swing',
                 'interval': 1000,
                 'maxRotation': 30,
-                'randomize': true,
+                'scatter': true,
                 'rotate': false,
                 'speed': 1000,
                 'tag': 'img'
@@ -49,7 +49,7 @@
 
                 $this.shuffleboard('reindex');
 
-                if (settings.randomize) {
+                if (settings.scatter) {
                     $this.shuffleboard('scatter');
                 }
 
@@ -110,8 +110,8 @@
                 var item = (data.direction == 'front')?$this.children(data.tag).first():$this.children(data.tag).last();
                 var x, y;
 
-                //Randomize final coordinates if neccessary
-                if (data.randomize) {
+                //scatter final coordinates if neccessary
+                if (data.scatter) {
                     x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - item.outerWidth() + 1));
                     y = parseInt($this.css('paddingTop')) + Math.floor(Math.random()*($this.height() - item.outerHeight() + 1));
                 } else {
@@ -230,6 +230,13 @@
                 var data = $this.data('shuffleboard');
                 data._started = false;
                 if (data._timeout) { clearTimeout(data._timeout); }
+            });
+        },
+        'toggle': function() {
+            return this.each(function(){
+                var $this = $(this);
+                var data = $this.data('shuffleboard');
+                $this.shuffleboard((data._started)?'stop':'start');
             });
         }
     }
