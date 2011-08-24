@@ -1,3 +1,9 @@
+/*!
+ * jQuery Shuffleboard Plugin
+ * Created by Rehan Dalal
+ *
+ * Date: Thu Jun 30 14:16:56 2011 -0400
+ */
 (function( $ ){
     var methods = {
         'create': function(options) {
