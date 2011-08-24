@@ -1,9 +1,16 @@
-/*!
- * jQuery Shuffleboard Plugin
- * Created by Rehan Dalal
- *
- * Date: Thu Jun 30 14:16:56 2011 -0400
- */
+/*
+* shuffleboard: A jQuery plugin to create a Shuffleboard UI component
+*
+* Limitations:
+* - requires jquery.transform.light.js (https://github.com/louisremi/jquery.transform.js) for rotation to work.
+*
+* Latest version and complete README available on Github:
+* https://github.com/rehandalal/shuffleboard
+*
+* Copyright 2011 Rehan Dalal
+* Licensed under the MIT license.
+*
+*/
 (function( $ ){
     var methods = {
         'create': function(options) {
