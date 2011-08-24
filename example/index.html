@@ -8,16 +8,33 @@
         <script type="text/javascript" src="../jquery.shuffleboard.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $('#shuffler').shuffleboard();
+                $('#shuffler').shuffleboard({
+                    direction: 'front',
+                    interval: 200,
+                    speed: 600,
+                    rotate: true
+                });
             });
         </script>
     </head>
     <body>
-        <div id="shuffler">
+        <div id="shuffler" onclick="$('#shuffler').shuffleboard('toggle');">
             <img src="1.jpg" alt="" style="width: 200px; height: 200px;" />
             <img src="2.jpg" alt="" style="width: 200px; height: 200px;" />
             <img src="3.jpg" alt="" style="width: 200px; height: 200px;" />
             <img src="4.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="5.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="6.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="7.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="8.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="9.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="10.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="11.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="12.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="13.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="14.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="15.jpg" alt="" style="width: 200px; height: 200px;" />
+            <img src="16.jpg" alt="" style="width: 200px; height: 200px;" />
         </div>
     </body>
 </html>
