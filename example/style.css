@@ -1,0 +1,19 @@
+#shuffler {
+    background-color: #eee;
+    height: 400px;
+    margin: 50px 50px;
+    padding: 10px;
+    position: relative;
+    width: 400px;
+}
+
+#shuffler img {
+    background-color: #fff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    -icab-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    -o-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    padding: 10px 10px 60px 10px;
+    position: absolute;
+}

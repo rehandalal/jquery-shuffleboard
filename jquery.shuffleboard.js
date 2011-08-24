@@ -3,7 +3,7 @@
         'create': function(options) {
             var settings = {
                 'autoStart': true,
-                'direction': 'backward',
+                'direction': 'back',
                 'easing': 'swing',
                 'interval': 1000,
                 'randomize': true,
@@ -23,6 +23,12 @@
                 if (!data) {
                     $this.data('shuffleboard', settings);
                 }
+                
+                //Set the appropriate CSS positioning on the elements
+                $this.css({'position': 'relative'});
+                $this.children(settings.tag).each(function(){
+                    $(this).css({'position': 'absolute'})
+                });
 
                 $this.shuffleboard('reindex');
 
@@ -68,8 +74,8 @@
                 var data = $this.data('shuffleboard');
                 $this.children(data.tag).each(function(){
                     //Generate random coordinates and move items
-                    var x = Math.floor(Math.random()*($this.outerWidth() - $(this).outerWidth() + 1));
-                    var y = Math.floor(Math.random()*($this.outerHeight() - $(this).outerHeight() + 1));
+                    var x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - $(this).outerWidth() + 1));
+                    var y = parseInt($this.css('paddingTop')) + Math.floor(Math.random()*($this.height() - $(this).outerHeight() + 1));
                     $(this).css({'left': x+'px', 'top': y+'px'});
                 });
             });
@@ -78,20 +84,26 @@
             return this.each(function(){
                 var $this = $(this);
                 var data = $this.data('shuffleboard');
-                var item = (data.direction == 'forward')?$this.children(data.tag).first():$this.children(data.tag).last();
+                var item = (data.direction == 'front')?$this.children(data.tag).first():$this.children(data.tag).last();
 
                 if (data.randomize) {
-                    var x = Math.floor(Math.random()*($this.outerWidth() - item.outerWidth() + 1));
-                    var y = Math.floor(Math.random()*($this.outerHeight() - item.outerHeight() + 1));
+                    var x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - item.outerWidth() + 1));
+                    var y = parseInt($this.css('paddingTop')) + Math.floor(Math.random()*($this.height() - item.outerHeight() + 1));
                 } else {
                     var x = 0;
                     var y = 0;
                 }
 
                 item.animate({'top': $this.outerHeight() + 'px', 'left': $this.outerWidth() + 'px'}, data.speed / 2, data.easing, function(){
-                    $(this).css('zIndex', 0);
+                    $(this).css('zIndex', ((data.direction == 'front')?($this.children(data.tag).length + 1):0));
                     $(this).animate({'top': y+'px', 'left': x+'px'}, data.speed / 2, data.easing, function(){
-                        $this.prepend($(this).clone());
+                        if (data.direction == 'front')
+                        {
+                            $this.append($(this).clone());
+                        } else {
+                            $this.prepend($(this).clone());
+                        }
+                        
                         $(this).remove();
                         $this.shuffleboard('reindex');
 
