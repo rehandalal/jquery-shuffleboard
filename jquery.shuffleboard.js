@@ -115,8 +115,8 @@
                     x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - item.outerWidth() + 1));
                     y = parseInt($this.css('paddingTop')) + Math.floor(Math.random()*($this.height() - item.outerHeight() + 1));
                 } else {
-                    x = 0;
-                    y = 0;
+                    x = parseInt(item.css('paddingLeft'));
+                    y = parseInt(item.css('paddingTop'));
                 }
 
                 var firstAnimation = {};

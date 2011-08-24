@@ -7,6 +7,57 @@ http://code.by.reh.an/jquery-shuffleboard/
 
 This a jQuery plugin that allows you to create a Shuffleboard UI component.
 
+LIMITATIONS
+===========
+- Rotation will only work if you include 'jquery.transform.js' or
+  'jquery.transform.light.js'. You can get the latest version of this file from:
+  https://github.com/louisremi/jquery.transform.js
+- When shuffling images make sure to specify their height and width to ensure
+  that there are no positioning bugs.
+
+SETTINGS
+========
+
+The following settings are available for the plugin:
+
+- autoStart (boolean) [Default: true]
+  Set to true to make the shuffleboard begin shuffling automatically.
+
+- animateRotation (boolean) [Default: true]
+  If 'rotate' is set to true, this will animate the rotation on each shuffle.
+
+- corner (string) [Default: 'nearest']
+  This determines which corner of the container the items will be shuffled over.
+  (Values: 'nearest', 'topleft', 'topright', 'bottomright', 'bottomleft')
+
+- direction (string) [Default: 'back']
+  This sets the direction in which to shuffle (ie. shuffle to the back or front)
+  (Values: 'back', 'front')
+
+- easing (string) [Default: 'swing']
+  This sets the jQuery easing function to use on animations. See here:
+  http://api.jquery.com/animate/#easing
+
+- interval (int) [Default: 1000]
+  This sets the interval, in milliseconds, between shuffles.
+
+- maxRotation (int) [Default: 30]
+  This is the maxmimum angle of rotation when 'rotate' is set to true.
+
+- randomize (boolean) [Default: true]
+  This will scatter the items on creation and shuffle each item to a random
+  location within the bounds of the container.
+
+- rotate (boolean) [Default: false]
+  Set this to true to use a CSS3 transform to rotate the items.
+
+- speed (int) [Default: 1000]
+  This is the time it take for one shuffle to be completed.
+
+- tag (string) [Default 'img']
+  This sets the type of child-tag that is shuffled within the container.
+
+
 -----------------------------
 CHANGE LOG
 -----------------------------
