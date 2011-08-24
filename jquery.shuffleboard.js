@@ -16,10 +16,13 @@
         'create': function(options) {
             var settings = {
                 'autoStart': true,
+                'animateRotation': true,
                 'direction': 'back',
                 'easing': 'swing',
                 'interval': 1000,
+                'maxRotation': 30,
                 'randomize': true,
+                'rotate': false,
                 'speed': 1000,
                 'tag': 'img'
             }
@@ -90,6 +93,12 @@
                     var x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - $(this).outerWidth() + 1));
                     var y = parseInt($this.css('paddingTop')) + Math.floor(Math.random()*($this.height() - $(this).outerHeight() + 1));
                     $(this).css({'left': x+'px', 'top': y+'px'});
+
+                    //Rotate if enabled
+                    if (data.rotate) {
+                        var ang = (Math.floor(Math.random() * ((data.maxRotation * 2) + 1)) - data.maxRotation);
+                        $(this).css({'transform': 'rotate('+ang+'deg)'})
+                    }
                 });
             });
         },
@@ -98,18 +107,43 @@
                 var $this = $(this);
                 var data = $this.data('shuffleboard');
                 var item = (data.direction == 'front')?$this.children(data.tag).first():$this.children(data.tag).last();
+                var x, y;
 
+                //Randomize final coordinates if neccessary
                 if (data.randomize) {
-                    var x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - item.outerWidth() + 1));
-                    var y = parseInt($this.css('paddingTop')) + Math.floor(Math.random()*($this.height() - item.outerHeight() + 1));
+                    x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - item.outerWidth() + 1));
+                    y = parseInt($this.css('paddingTop')) + Math.floor(Math.random()*($this.height() - item.outerHeight() + 1));
                 } else {
-                    var x = 0;
-                    var y = 0;
+                    x = 0;
+                    y = 0;
                 }
 
-                item.animate({'top': $this.outerHeight() + 'px', 'left': $this.outerWidth() + 'px'}, data.speed / 2, data.easing, function(){
+                var firstAnimation = {
+                    'top': $this.outerHeight() + 'px', 
+                    'left': $this.outerWidth() + 'px'
+                };
+
+                //Add rotation to the animation if enabled
+                if (data.rotate && data.animateRotation) {
+                    $.extend(firstAnimation, {'transform': 'rotate(0deg)'});
+                }
+
+                item.animate(firstAnimation, data.speed / 2, data.easing, function(){
+                    //Send to the front or back
                     $(this).css('zIndex', ((data.direction == 'front')?($this.children(data.tag).length + 1):0));
-                    $(this).animate({'top': y+'px', 'left': x+'px'}, data.speed / 2, data.easing, function(){
+
+                    var secondAnimation = {
+                        'top': y+'px',
+                        'left': x+'px'
+                    }
+
+                    //Add rotation to the animation if enabled
+                    if (data.rotate && data.animateRotation) {
+                        var ang = (Math.floor(Math.random() * ((data.maxRotation * 2) + 1)) - data.maxRotation);
+                        $.extend(secondAnimation, {'transform': 'rotate('+ang+'deg)'});
+                    }
+
+                    $(this).animate(secondAnimation, data.speed / 2, data.easing, function(){
                         if (data.direction == 'front')
                         {
                             $this.append($(this).clone());
