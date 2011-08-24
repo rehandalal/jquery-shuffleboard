@@ -17,6 +17,7 @@
             var settings = {
                 'autoStart': true,
                 'animateRotation': true,
+                'corner': 'nearest',
                 'direction': 'back',
                 'easing': 'swing',
                 'interval': 1000,
@@ -118,10 +119,64 @@
                     y = 0;
                 }
 
-                var firstAnimation = {
-                    'top': $this.outerHeight() + 'px', 
-                    'left': $this.outerWidth() + 'px'
+                var firstAnimation = {};
+                
+                //Select the appropriate corner to shuffle over
+                var corner = {};
+                switch(data.corner)
+                {
+                    case 'topleft':
+                        corner = {
+                            'top': (-item.outerHeight()) + 'px',
+                            'left': (-item.outerWidth()) + 'px'
+                        }
+                        break;
+
+                    case 'topright':
+                        corner = {
+                            'top': (-item.outerHeight()) + 'px',
+                            'left': $this.outerWidth() + 'px'
+                        }
+                        break;
+
+                    case 'bottomright':
+                        corner = {
+                            'top': $this.outerHeight() + 'px',
+                            'left': $this.outerWidth() + 'px'
+                        }
+                        break;
+
+                    case 'bottomleft':
+                        corner = {
+                            'top': $this.outerHeight() + 'px',
+                            'left': (-item.outerWidth()) + 'px'
+                        }
+                        break;
+
+                    default:
+                        var itemCenter = [
+                            parseInt(item.css('left')) + (item.outerWidth() / 2),
+                            parseInt(item.css('top')) + (item.outerHeight() / 2)
+                        ];
+
+                        var containerCenter = [
+                            $this.outerWidth() / 2,
+                            $this.outerHeight() / 2
+                        ];
+
+                        if (itemCenter[0] < containerCenter[0]) {
+                            corner['left'] = (-item.outerWidth()) + 'px';
+                        } else {
+                            corner['left'] = $this.outerWidth() + 'px';
+                        }
+
+                        if (itemCenter[1] < containerCenter[1]) {
+                            corner['top'] = (-item.outerHeight()) + 'px';
+                        } else {
+                            corner['top'] = $this.outerHeight() + 'px';
+                        }
                 };
+                $.extend(firstAnimation, corner);
 
                 //Add rotation to the animation if enabled
                 if (data.rotate && data.animateRotation) {
