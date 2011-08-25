@@ -15,6 +15,22 @@ LIMITATIONS
 - When shuffling images make sure to specify their height and width to ensure
   that there are no positioning bugs.
 
+USING THE PLUGIN
+================
+Simply select the element(s) you wish to turn into a shuffleboard and run the
+.shuffleboard() function on it. You may optionally pass it settings as in the
+following examples:
+$('#myShuffleboard').shuffleboard();
+$('#myOtherShuffleboard').shuffleboard({ rotate: true });
+
+See below for a full list of settings available.
+
+Alternatively to run specific methods on the plugin use the following:
+$('#myShuffleboard').shuffleboard(method, arguments);
+eg: $('#myShuffleboard').shuffleboard('stop');
+
+See below for a full list of methods available.
+
 SETTINGS
 ========
 
@@ -57,10 +73,43 @@ The following settings are available for the plugin:
 - tag (string) [Default 'img']
   This sets the type of child-tag that is shuffled within the container.
 
+METHODS
+=======
+
+- create(options)
+  This is the function used to create a new Shuffleboard from an element. It
+  accepts an optional 'options' parameter which is an object containing the
+  settings as listed above.
+
+- destroy()
+  This function destroys an existing Shuffleboard.
+
+- reindex()
+  This function assigns the correct z-index to all the items in the the
+  shuffleboard.
+
+- scatter()
+  This function scatters the items around within the bounds of the shuffleboard.
+  It will respect CSS padding values and make sure items do not get placed
+  within the padding area (unless rotated).
+
+- shuffle()
+  This function shuffles the next item.
+
+- start()
+  This function starts the intervallic shuffling on the items.
+
+- stop()
+  This function stops the intervallic shuffling of the items.
+
+- toggle()
+  This function toggles the intervallic shuffling of the items.
 
 -----------------------------
 CHANGE LOG
 -----------------------------
+
+2011.08.25 - Revised the README file to include full documentation.
 
 2011.08.24 - Added code for CSS3 rotations and selecting the corner to shuffle
              over. Fixed a bug with non-randomized shuffling. Added the 'toggle'
