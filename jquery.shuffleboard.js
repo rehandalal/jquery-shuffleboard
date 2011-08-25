@@ -39,29 +39,39 @@
                 //If the plugin hasn't been initialized yet
                 if (!data) {
                     $this.data('shuffleboard', settings);
+                    data = $this.data('shuffleboard');
                 }
+
+                //beforeCreate Callback
+                if ($.isFunction(data.beforeCreate)) { data.beforeCreate($this); }
                 
                 //Set the appropriate CSS positioning on the elements
                 $this.css({'position': 'relative'});
-                $this.children(settings.tag).each(function(){
+                $this.children(data.tag).each(function(){
                     $(this).css({'position': 'absolute'})
                 });
 
                 $this.shuffleboard('reindex');
 
-                if (settings.scatter) {
+                if (data.scatter) {
                     $this.shuffleboard('scatter');
                 }
 
-                if (settings.autoStart) {
+                if (data.autoStart) {
                     $this.shuffleboard('start');
                 }
+
+                //afterCreate Callback
+                if ($.isFunction(data.afterCreate)) { data.afterCreate($this); }
             });
         },
         'destroy': function() {
             return this.each(function(){
                 var $this = $(this);
                 var data = $this.data('shuffleboard');
+
+                //beforeDestroy Callback
+                if ($.isFunction(data.beforeDestroy)) { data.beforeDestroy($this); }
 
                 //Stop the shuffleboard
                 $this.shuffleboard('stop');
@@ -72,7 +82,32 @@
                 //Remove data
                 data.shuffleboard.remove();
                 $this.removeData('shuffleboard');
+
+                //afterDestroy Callback
+                if ($.isFunction(data.afterDestroy)) { data.afterDestroy($this); }
             });
+        },
+        'option': function(key, value) {
+            if (typeof key === 'object') {
+                return this.each(function(){
+                    var $this = $(this);
+
+                    $.each(key, function(index, value){
+                       $this.shuffleboard('option', index, value);
+                    });
+                });
+            } else {
+                if (typeof value === 'undefined') {
+                    var data = this.first().data('shuffleboard');
+                    return data[key];
+                } else {
+                    return this.each(function(){
+                        var $this = $(this);
+                        var data = $this.data('shuffleboard');
+                        data[key] = value;
+                    });
+                }
+            }
         },
         'reindex': function() {
             return this.each(function(){
@@ -89,6 +124,10 @@
             return this.each(function(){
                 var $this = $(this);
                 var data = $this.data('shuffleboard');
+
+                //beforeScatter Callback
+                if ($.isFunction(data.beforeScatter)) { data.beforeScatter($this); }
+
                 $this.children(data.tag).each(function(){
                     //Generate random coordinates and move items
                     var x = parseInt($this.css('paddingLeft')) + Math.floor(Math.random()*($this.width() - $(this).outerWidth() + 1));
@@ -101,6 +140,9 @@
                         $(this).css({'transform': 'rotate('+ang+'deg)'})
                     }
                 });
+
+                //afterScatter Callback
+                if ($.isFunction(data.afterScatter)) { data.afterScatter($this); }
             });
         },
         'shuffle': function() {
@@ -108,6 +150,10 @@
                 var $this = $(this);
                 var data = $this.data('shuffleboard');
                 var item = (data.direction == 'front')?$this.children(data.tag).first():$this.children(data.tag).last();
+
+                //beforeShuffle Callback
+                if ($.isFunction(data.beforeShuffle)) { data.beforeShuffle($this, item); }
+
                 var x, y;
 
                 //scatter final coordinates if neccessary
@@ -208,6 +254,9 @@
                         
                         $(this).remove();
                         $this.shuffleboard('reindex');
+                        
+                        //afterShuffle Callback
+                        if ($.isFunction(data.afterShuffle)) { data.afterShuffle($this, item); }
 
                         if (data._started) {
                             $this.shuffleboard('start');

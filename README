@@ -3,7 +3,7 @@ READ ME
 -----------------------------
 jquery-shuffleboard
 Rehan Dalal
-http://code.by.reh.an/jquery-shuffleboard/
+http://www.varchr.com/projects/jquery-shuffleboard/
 
 This a jQuery plugin that allows you to create a Shuffleboard UI component.
 
@@ -33,7 +33,6 @@ See below for a full list of methods available.
 
 SETTINGS
 ========
-
 The following settings are available for the plugin:
 
 - autoStart (boolean) [Default: true]
@@ -73,16 +72,55 @@ The following settings are available for the plugin:
 - tag (string) [Default 'img']
   This sets the type of child-tag that is shuffled within the container.
 
+CALLBACKS
+=========
+The following are the callbacks available for the plugin:
+
+- afterCreate(shuffleboard)
+  This is called after the shuffleboard is created.
+
+- beforeCreate(shuffleboard)
+  This is called before the shuffleboard is created.
+
+- afterDestroy(shuffleboard)
+  This is called after the shuffleboard is destroyed.
+
+- beforeDestroy(shuffleboard)
+  This is called before the shuffleboard is destroyed.
+
+- afterScatter(shuffleboard)
+  This is called after the items are scattered on the shuffleboard.
+
+- beforeScatter(shuffleboard)
+  This is called before the items are scattered on the shuffleboard.
+
+- afterShuffle(shuffleboard, item)
+  This is called after an item is shuffled.
+
+- beforeShuffle(shuffleboard, item)
+  This is called before an item is shuffled.
+
 METHODS
 =======
+The following are the methods available for the plugin:
 
 - create(options)
   This is the function used to create a new Shuffleboard from an element. It
   accepts an optional 'options' parameter which is an object containing the
-  settings as listed above.
+  settings as listed above. In addition to the settings, several callback
+  functions can also be set from within the options.
 
 - destroy()
   This function destroys an existing Shuffleboard.
+
+- option(optionName)
+  This function gets the value of a option.
+
+- option(optionName, optionValue)
+  This functions sets the value of a option.
+
+- option(options)
+  This function accepts a map of option name and value pairs and sets each one.
 
 - reindex()
   This function assigns the correct z-index to all the items in the the
@@ -109,10 +147,10 @@ METHODS
 CHANGE LOG
 -----------------------------
 
-2011.08.25 - Revised the README file to include full documentation.
+2011.08.25 - Added callbacks and the 'option' method.
 
 2011.08.24 - Added code for CSS3 rotations and selecting the corner to shuffle
              over. Fixed a bug with non-randomized shuffling. Added the 'toggle'
              method.
 
-2011.08.23 - Added to GitHub
+2011.08.23 - Added to GitHub.
