@@ -17,7 +17,7 @@
             var settings = {
                 'autoStart': true,
                 'animateRotation': true,
-                'corner': 'nearest',
+                'corner': 'topleft',
                 'direction': 'back',
                 'easing': 'swing',
                 'interval': 1000,
@@ -82,9 +82,6 @@
                 //Remove data
                 data.shuffleboard.remove();
                 $this.removeData('shuffleboard');
-
-                //afterDestroy Callback
-                if ($.isFunction(data.afterDestroy)) { data.afterDestroy($this); }
             });
         },
         'option': function(key, value) {

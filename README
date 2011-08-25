@@ -82,9 +82,6 @@ The following are the callbacks available for the plugin:
 - beforeCreate(shuffleboard)
   This is called before the shuffleboard is created.
 
-- afterDestroy(shuffleboard)
-  This is called after the shuffleboard is destroyed.
-
 - beforeDestroy(shuffleboard)
   This is called before the shuffleboard is destroyed.
 
