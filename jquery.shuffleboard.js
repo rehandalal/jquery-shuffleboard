@@ -88,15 +88,17 @@
             });
         },
         'option': function(key, value) {
+            //Check if a map of options was provided
             if (typeof key === 'object') {
                 return this.each(function(){
                     var $this = $(this);
-
+                    var data = $this.data('shuffleboard');
                     $.each(key, function(index, value){
-                       $this.shuffleboard('option', index, value);
+                       data[index] = value;
                     });
                 });
             } else {
+                //Check if this is a get or set
                 if (typeof value === 'undefined') {
                     var data = this.first().data('shuffleboard');
                     return data[key];
